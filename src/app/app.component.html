@@ -1,16 +1,13 @@
-<style>
-
-</style>
-
+<!--Home page with navigation-->
 <div style="text-align:center">
   <h1>
     8-Player Tournament Bracket!
   </h1>
-  <nav>
-    <span><a href="/hello">Welcome</a></span>&nbsp;|&nbsp;
-    <span><a href="/registration">Registration</a></span>&nbsp;|&nbsp;
-    <span><a href="/brackets">Brackets</a></span>
-  </nav>
+  <div>
+    <span><a routerLink="/hello" routerLinkActive="active">Welcome</a></span>&nbsp;|&nbsp;
+    <span><a routerLink="/registration" routerLinkActive="active">Registration</a></span>&nbsp;|&nbsp;
+    <span><a routerLink="/brackets" routerLinkActive="active">Brackets</a></span>
+  </div>
 </div>
 
 <router-outlet></router-outlet>
