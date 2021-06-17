@@ -15,6 +15,15 @@ export class RosterService {
   }
 
   addContestant(newContestant: string) {
-    this.contestants.push(newContestant);
+    if (newContestant == null || newContestant == "" || this.contestants.includes(newContestant, 0)) {
+      throw 'Contestant cannot be registered';
+    }
+
+    try {
+      this.contestants.push(newContestant);
+    } catch (exception) {
+      console.error(exception);
+    }
   }
+  
 }
