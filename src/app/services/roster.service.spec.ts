@@ -16,7 +16,7 @@ describe('RosterService Test', () => {
   });
 
   it('should not allow null names', () => {
-    var name = null;
+    let name:string = null;
     expect(function(){service.addContestant(name);}).toThrowError('Contestant cannot be registered');
   });
 
