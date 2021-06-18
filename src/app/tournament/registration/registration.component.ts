@@ -17,11 +17,15 @@ export class RegistrationComponent implements OnInit {
 
    registerContestants() {
      if(this.players.length === 0 || this.players.length%2 !== 0) {
-      throw new Error('Invalid roster')
+      throw new Error('Invalid roster');
      }
-
+     
     try {
-      
+      for (let index = 0; index < this.players.length; index++) {
+        do {
+          this.rosterService.addContestant(this.players[index]);
+        } while (this.players[index] !== '');
+      }
     } catch(exception) {
       console.error(exception);
     }
