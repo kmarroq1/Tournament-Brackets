@@ -14,7 +14,7 @@ export class RosterService {
     return this.contestants;
   }
 
-  addContestant(newContestant: string) {
+  addContestant(newContestant: string | null) {
     if (newContestant === null || newContestant === "" || this.contestants.includes(newContestant, 0)) {
       throw new Error('Contestant cannot be registered');
     }
