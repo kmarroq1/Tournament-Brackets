@@ -9,18 +9,18 @@ import { RosterService } from 'src/app/services/roster.service';
 export class RegistrationComponent implements OnInit {
   public players: string[];
   public informationMessage: string;
-  public edited: boolean;
   constructor(private rosterService: RosterService) {
     this.players = ['', '', '', '', '', '', '', ''];
     this.informationMessage = '';
-    this.edited = false;
   }
 
   registerContestants() {
-    let modifiedPlayers = this.players.filter(name => name !== '');
-    if (modifiedPlayers.length === 0 || modifiedPlayers.length % 2 !== 0) {
-      this.informationMessage = 'Invalid roster';
-      this.edited = true;
+    let modifiedPlayers = this.players.filter((name) => name !== '');
+    if (modifiedPlayers.length === 0) {
+      this.informationMessage = 'Error: Invalid roster';
+      throw new Error(this.informationMessage);
+    } else if (modifiedPlayers.length % 2 !== 0) {
+      this.informationMessage = 'Error: Uneven number of contestants not allowed';
       throw new Error(this.informationMessage);
     }
 
@@ -30,20 +30,10 @@ export class RegistrationComponent implements OnInit {
         .forEach((player) => {
           this.rosterService.addContestant(player);
         });
+      this.informationMessage = this.rosterService.getContestants().toString();
     } catch (exception) {
       this.informationMessage = exception;
       console.error(exception);
-    }
-    this.edited = true;
-  }
-
-  editedForm() {
-    if (this.edited && this.informationMessage === '') {
-      return this.rosterService.getContestants().toString();
-    } else if (this.edited && this.informationMessage !== '') {
-      return 'Error: ' + this.informationMessage;
-    } else {
-      return '';
     }
   }
 

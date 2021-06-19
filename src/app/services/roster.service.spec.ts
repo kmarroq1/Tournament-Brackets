@@ -12,7 +12,7 @@ describe('RosterService Test', () => {
 
   it('should not allow duplicate names', () => {
     service.addContestant('Clover');
-    expect(function(){service.addContestant('Clover');}).toThrowError('Contestant cannot be registered');
+    expect(function(){service.addContestant('Clover');}).toThrowError('Contestant already exists');
   });
 
   it('should not allow null names', () => {

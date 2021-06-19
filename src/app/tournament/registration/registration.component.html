@@ -1,10 +1,18 @@
 <h2>Register Players</h2>
 
-<div> {{editedForm()}} </div>
+<div>{{ informationMessage }}</div>
 
 <form (ngSubmit)="registerContestants()">
-    <div class="contestant-name" *ngFor="let value of players; let i=index; trackBy:trackByFn">
-        <input type="text" placeholder="Contestant {{[i]}}" name="contestantName{{[i]}}" [(ngModel)]="players[i]">
-    </div>
-    <button type="submit">Register Contestants</button>
+  <div
+    class="contestant-name"
+    *ngFor="let value of players; let i = index; trackBy: trackByFn"
+  >
+    <input
+      type="text"
+      placeholder="Contestant {{ [i] }}"
+      name="contestantName{{ [i] }}"
+      [(ngModel)]="players[i]"
+    />
+  </div>
+  <button type="submit">Register Contestants</button>
 </form>

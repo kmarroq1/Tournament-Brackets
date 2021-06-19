@@ -1,22 +1,26 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RosterService {
-
   private contestants: string[];
   constructor() {
     this.contestants = [];
-   }
+  }
 
-  getContestants() : string[] {
+  getContestants(): string[] {
     return this.contestants;
   }
 
   addContestant(newContestant: string | null) {
-    if (newContestant === null || newContestant === "" || this.contestants.includes(newContestant, 0)) {
+    if (
+      newContestant === null ||
+      newContestant === ''
+    ) {
       throw new Error('Contestant cannot be registered');
+    } else if (this.contestants.includes(newContestant, 0)) {
+      throw new Error('Contestant already exists');
     }
 
     try {
@@ -25,5 +29,4 @@ export class RosterService {
       console.error(exception);
     }
   }
-
 }
