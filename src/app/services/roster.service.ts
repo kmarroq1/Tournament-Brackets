@@ -25,5 +25,5 @@ export class RosterService {
       console.error(exception);
     }
   }
-  
+
 }
