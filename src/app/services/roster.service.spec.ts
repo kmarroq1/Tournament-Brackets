@@ -12,16 +12,22 @@ describe('RosterService Test', () => {
 
   it('should not allow duplicate names', () => {
     service.addContestant('Clover');
-    expect(function(){service.addContestant('Clover');}).toThrowError('Contestant already exists');
+    expect(function () {
+      service.addContestant('Clover');
+    }).toThrowError('Contestant already exists');
   });
 
   it('should not allow null names', () => {
-    let name:null = null;
-    expect(function(){service.addContestant(name);}).toThrowError('Contestant cannot be registered');
+    let name: null = null;
+    expect(function () {
+      service.addContestant(name);
+    }).toThrowError('Contestant cannot be registered');
   });
 
   it('should not allow empty string names', () => {
-    expect(function(){service.addContestant('');}).toThrowError('Contestant cannot be registered');
+    expect(function () {
+      service.addContestant('');
+    }).toThrowError('Contestant cannot be registered');
   });
 
   it('should add one contestant', () => {

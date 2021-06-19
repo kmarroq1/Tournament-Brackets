@@ -20,7 +20,8 @@ export class RegistrationComponent implements OnInit {
       this.informationMessage = 'Error: Invalid roster';
       throw new Error(this.informationMessage);
     } else if (modifiedPlayers.length % 2 !== 0) {
-      this.informationMessage = 'Error: Uneven number of contestants not allowed';
+      this.informationMessage =
+        'Error: Uneven number of contestants not allowed';
       throw new Error(this.informationMessage);
     }
 

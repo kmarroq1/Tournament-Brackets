@@ -5,13 +5,13 @@ import { RegistrationComponent } from './tournament/registration/registration.co
 import { BracketsComponent } from './tournament/brackets/brackets.component';
 
 const routes: Routes = [
-  { path: 'hello', component: HelloComponent},
-  { path: 'registration', component: RegistrationComponent},
-  { path: 'brackets', component: BracketsComponent}
+  { path: 'hello', component: HelloComponent },
+  { path: 'registration', component: RegistrationComponent },
+  { path: 'brackets', component: BracketsComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
