@@ -1,58 +1,62 @@
-<div>
+<div style="text-align:center">
   <h2>Round {{ roundNumber }}</h2>
-  <div>{{ winners.toString() }}</div>
-  <form (submit)="onSubmit()">
-    <div *ngFor="let amount of matches; let i = index; trackBy: trackByFn">
-      <h3>Match {{ matches[i] }}</h3>
+  <div *ngIf="currentPlayers.length === 1; else firstElseBlock">
+    Winner: {{ roundWinners.toString() }}
+  </div>
+  <ng-template #firstElseBlock>
+    <form (submit)="onSubmit()">
+      <div *ngFor="let amount of matches; let i = index; trackBy: trackByFn">
+        <h3>Match {{ i + 1 }}</h3>
 
-      <div *ngIf="i === 0; else elseBlock">
-        <div>
-          <input
-            type="radio"
-            value="{{ currentPlayers[i] }}"
-            name="Match{{ i }}"
-            [(ngModel)]="winners[i]"
-          />
-          <label for="{{ currentPlayers[i] }}">{{ currentPlayers[i] }}</label>
+        <div *ngIf="i === 0; else secondElseBlock">
+          <div>
+            <input
+              type="radio"
+              value="{{ currentPlayers[i] }}"
+              name="Match{{ i }}"
+              [(ngModel)]="roundWinners[i]"
+            />
+            <label for="{{ currentPlayers[i] }}">{{ currentPlayers[i] }}</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              value="{{ currentPlayers[i + 1] }}"
+              name="Match{{ i }}"
+              [(ngModel)]="roundWinners[i]"
+            />
+            <label for="{{ currentPlayers[i + 1] }}">{{
+              currentPlayers[i + 1]
+            }}</label>
+          </div>
         </div>
-        <div>
-          <input
-            type="radio"
-            value="{{ currentPlayers[i + 1] }}"
-            name="Match{{ i }}"
-            [(ngModel)]="winners[i]"
-          />
-          <label for="{{ currentPlayers[i + 1] }}">{{
-            currentPlayers[i + 1]
-          }}</label>
-        </div>
+
+        <ng-template #secondElseBlock>
+          <div>
+            <input
+              type="radio"
+              value="{{ currentPlayers[i * 2] }}"
+              name="Match{{ i }}"
+              [(ngModel)]="roundWinners[i]"
+            />
+            <label for="{{ currentPlayers[i * 2] }}">{{
+              currentPlayers[i * 2]
+            }}</label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              value="{{ currentPlayers[i * 2 + 1] }}"
+              name="Match{{ i }}"
+              [(ngModel)]="roundWinners[i]"
+            />
+            <label for="{{ currentPlayers[i * 2 + 1] }}">{{
+              currentPlayers[i * 2 + 1]
+            }}</label>
+          </div>
+        </ng-template>
       </div>
-
-      <ng-template #elseBlock>
-        <div>
-          <input
-            type="radio"
-            value="{{ currentPlayers[i * 2] }}"
-            name="Match{{ i }}"
-            [(ngModel)]="winners[i]"
-          />
-          <label for="{{ currentPlayers[i * 2] }}">{{
-            currentPlayers[i * 2]
-          }}</label>
-        </div>
-        <div>
-          <input
-            type="radio"
-            value="{{ currentPlayers[i * 2 + 1] }}"
-            name="Match{{ i }}"
-            [(ngModel)]="winners[i]"
-          />
-          <label for="{{ currentPlayers[i * 2 + 1] }}">{{
-            currentPlayers[i * 2 + 1]
-          }}</label>
-        </div>
-      </ng-template>
-    </div>
-    <button type="submit">Complete Round</button>
-  </form>
+      <button type="submit">Complete Round</button>
+    </form>
+  </ng-template>
 </div>

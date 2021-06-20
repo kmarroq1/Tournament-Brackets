@@ -8,14 +8,14 @@ import { RosterService } from 'src/app/services/roster.service';
 })
 export class BracketsComponent implements OnInit {
   public currentPlayers: string[];
-  public winners: string[];
+  public roundWinners: string[];
   public roundNumber: number;
   public matches: number[];
   constructor(private rosterService: RosterService) {
     this.currentPlayers = this.rosterService.getContestants();
     this.roundNumber = 1;
     this.matches = [];
-    this.winners = [];
+    this.roundWinners = [];
   }
 
   addMatches() {
@@ -40,14 +40,14 @@ export class BracketsComponent implements OnInit {
       this.roundNumber++;
     }
     this.currentPlayers.splice(0, this.currentPlayers.length);
-    for (let index = 0; index < this.winners.length; index++) {
-      this.currentPlayers[index] = this.winners[index];
+    for (let index = 0; index < this.roundWinners.length; index++) {
+      this.currentPlayers[index] = this.roundWinners[index];
     }
     if (this.currentPlayers.length === 1) {
-      this.winners = [];
-      this.winners[0] = this.currentPlayers[0];
+      this.roundWinners = [];
+      this.roundWinners[0] = this.currentPlayers[0];
     } else {
-      this.winners = [];
+      this.roundWinners = [];
     }
   }
   ngOnInit(): void {
