@@ -7,20 +7,19 @@ import { RosterService } from 'src/app/services/roster.service';
   styleUrls: ['./brackets.component.css'],
 })
 export class BracketsComponent implements OnInit {
-  public roster: string[];
   public currentPlayers: string[];
+  public winners: string[];
   public roundNumber: number;
   public matches: number[];
   constructor(private rosterService: RosterService) {
-    this.roster = this.rosterService.getContestants();
-    this.currentPlayers = this.roster;
+    this.currentPlayers = this.rosterService.getContestants();
     this.roundNumber = 1;
-    this.initializeMatches();
+    this.matches = [];
+    this.winners = [];
   }
 
-  initializeMatches() {
-    this.matches = [];
-    for (var index = 1; index < (this.currentPlayers.length / 2) + 1; index++)
+  addMatches() {
+    for (var index = 1; index < this.currentPlayers.length / 2 + 1; index++)
       this.matches.push(index);
   }
   trackByFn(index: any, item: any) {
@@ -28,11 +27,30 @@ export class BracketsComponent implements OnInit {
   }
 
   onSubmit() {
-    this.roundNumber++;
-    this.currentPlayers.pop();
-    this.currentPlayers.pop();
+    if (this.currentPlayers.length <= 1) {
+      return;
+    } else if (this.currentPlayers.length === 2) {
+      this.matches.pop();
+    } else if (this.currentPlayers.length === 4) {
+      this.matches.pop();
+      this.roundNumber++;
+    } else {
+      this.matches.pop();
+      this.matches.pop();
+      this.roundNumber++;
+    }
+    this.currentPlayers.splice(0, this.currentPlayers.length);
+    for (let index = 0; index < this.winners.length; index++) {
+      this.currentPlayers[index] = this.winners[index];
+    }
+    if (this.currentPlayers.length === 1) {
+      this.winners = [];
+      this.winners[0] = this.currentPlayers[0];
+    } else {
+      this.winners = [];
+    }
   }
   ngOnInit(): void {
-    this.matches.length = this.currentPlayers.length / 2;
+    this.addMatches();
   }
 }
