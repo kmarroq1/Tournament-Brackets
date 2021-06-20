@@ -6,7 +6,6 @@ import { RegistrationComponent } from './registration.component';
 describe('RegistrationComponent Test', () => {
   let form: FormsModule;
   let component: RegistrationComponent;
-  let service: RosterService;
   let fixture: ComponentFixture<RegistrationComponent>;
 
   beforeEach(async () => {
@@ -24,50 +23,43 @@ describe('RegistrationComponent Test', () => {
   });
 
   it('should register two players', () => {
-    const input = fixture.nativeElement.querySelector('input');
-    input.contestantName1 = 'Clover';
-    input.contestantName2 = 'Sam';
-    input.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
+    component.players.push('Clover');
+    component.players.push('Sam');
+    component.registerContestants();
 
-    expect(component.players.toString()).toEqual('Clover,Sam');
+    expect(component.informationMessage).toEqual('Clover,Sam');
   });
 
   it('should not allow duplicate names', () => {
-    const input = fixture.nativeElement.querySelector('input');
-    input.contestantName1 = 'Clover';
-    input.contestantName2 = 'Clover';
-    input.dispatchEvent(new Event('input'));
-
-    expect(component.informationMessage).toEqual('Contestant already exists');
+    component.players.push('Clover');
+    component.players.push('Clover');
+    component.registerContestants();
+    expect(component.informationMessage.toString()).toEqual('Error: Contestant already exists');
   });
 
   it('should not include empty strings in roster', () => {
-    const input = fixture.nativeElement.querySelector('input');
-    input.contestantName1 = '';
-    input.contestantName2 = 'Clover';
-    input.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
+    component.players.push('Sam');
+    component.players.push('');
+    component.players.push('Clover');
+    component.registerContestants();
 
-    expect(service.getContestants().toString()).toEqual('Clover');
+    expect(component.informationMessage).toEqual('Sam,Clover');
   });
 
   it('should not allow zero players', () => {
-    const input = fixture.nativeElement.querySelector('input');
-    input.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
+    component.players.push('');
 
-    expect(component.informationMessage).toEqual('Error: Invalid roster');
+    expect(function () {
+      component.registerContestants();
+    }).toThrowError('Error: Invalid roster');
   });
 
   it('should not allow odd number of players', () => {
-    const input = fixture.nativeElement.querySelector('input');
-    input.contestantName1 = 'Clover';
-    input.contestantName2 = 'Sam';
-    input.contestantName3 = 'Alex';
-    input.dispatchEvent(new Event('input'));
-    fixture.detectChanges();
-
-    expect(component.informationMessage).toEqual('Error: Uneven number of contestants not allowed');
+    component.players.push('Clover');
+    component.players.push('Sam');
+    component.players.push('Alex');
+    expect(function () {
+      component.registerContestants();
+    }).toThrowError('Error: Uneven number of contestants not allowed');
   });
 });

@@ -34,7 +34,7 @@ export class RegistrationComponent implements OnInit {
       this.informationMessage = this.rosterService.getContestants().toString();
     } catch (exception) {
       this.informationMessage = exception;
-      console.error(exception);
+      console.error(this.informationMessage);
     }
   }
 
