@@ -32,13 +32,15 @@ describe('RosterService Test', () => {
 
   it('should add one contestant', () => {
     service.addContestant('Clover');
-    expect(service.getContestants.toString).toBeTruthy('Clover');
+
+    expect(service.getContestants().toString()).toEqual('Clover');
   });
 
   it('should add several contestants', () => {
     service.addContestant('Clover');
     service.addContestant('Sam');
     service.addContestant('Alex');
-    expect(service.getContestants.toString).toBeTruthy('Clover, Sam, Alex');
+
+    expect(service.getContestants().toString()).toEqual('Clover,Sam,Alex');
   });
 });
