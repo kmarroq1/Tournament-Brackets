@@ -1,1 +1,60 @@
-<p>brackets works!</p>
+<div>
+  <h2>Round {{ roundNumber }}</h2>
+  <div>{{ currentPlayers.toString() }}</div>
+  <form (ngSubmit)="onSubmit()">
+    <div
+      *ngFor="let amount of matches; let i = index; trackBy: trackByFn"
+    >
+      <h3>Match {{ matches[i] }}</h3>
+
+      <div *ngIf="i === 0; else elseBlock">
+        <div>
+          <input
+            type="radio"
+            value="{{ currentPlayers[i] }}"
+            name="Match{{ matches[i] }}"
+            [(ngModel)]="currentPlayers[i]"
+          />
+          <label for="{{ currentPlayers[i] }}">{{ currentPlayers[i] }}</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            value="{{ currentPlayers[i + 1] }}"
+            name="Match{{ matches[i] }}"
+            [(ngModel)]="currentPlayers[i + 1]"
+          />
+          <label for="{{ currentPlayers[i + 1] }}">{{
+            currentPlayers[i + 1]
+          }}</label>
+        </div>
+      </div>
+
+      <ng-template #elseBlock>
+        <div>
+          <input
+            type="radio"
+            value="{{ currentPlayers[i * 2 - 1] }}"
+            name="Match{{ matches[i] }}"
+            [(ngModel)]="currentPlayers[i * 2 - 1]"
+          />
+          <label for="{{ currentPlayers[i * 2 - 1] }}">{{
+            currentPlayers[i * 2 - 1]
+          }}</label>
+        </div>
+        <div>
+          <input
+            type="radio"
+            value="{{ currentPlayers[i * 2] }}"
+            name="{{ matches[i] }}"
+            [(ngModel)]="currentPlayers[i * 2]"
+          />
+          <label for="{{ currentPlayers[i * 2] }}">{{
+            currentPlayers[i * 2]
+          }}</label>
+        </div>
+      </ng-template>
+    </div>
+    <button type="submit">Complete Round</button>
+  </form>
+</div>
