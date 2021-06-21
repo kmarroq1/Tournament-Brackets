@@ -30,6 +30,7 @@ export class BracketsComponent implements OnInit {
     if (this.currentPlayers.length <= 1) {
       return;
     } else if (this.currentPlayers.length === 2) {
+      this.rosterService.resetContestants();
       this.matches.pop();
     } else if (this.currentPlayers.length === 4) {
       this.matches.pop();

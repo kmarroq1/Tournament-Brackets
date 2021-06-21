@@ -26,4 +26,8 @@ export class RosterService {
       console.error(exception);
     }
   }
+
+  resetContestants() {
+    this.contestants = [];
+  }
 }
