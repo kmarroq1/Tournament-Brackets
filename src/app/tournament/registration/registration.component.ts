@@ -19,18 +19,16 @@ export class RegistrationComponent implements OnInit {
     if (modifiedPlayers.length === 0) {
       this.informationMessage = 'Error: Invalid roster';
       throw new Error(this.informationMessage);
-    } else if (modifiedPlayers.length % 2 !== 0) {
+    } else if (modifiedPlayers.length % 2 !== 0 || modifiedPlayers.length === 6) {
       this.informationMessage =
-        'Error: Uneven number of contestants not allowed';
+        'Error: Only 2, 4, or 8 contestants allowed';
       throw new Error(this.informationMessage);
     }
 
     try {
-      this.players
-        .filter((player) => player !== '')
-        .forEach((player) => {
-          this.rosterService.addContestant(player);
-        });
+      modifiedPlayers.forEach((player) => {
+        this.rosterService.addContestant(player);
+      });
       this.informationMessage = this.rosterService.getContestants().toString();
     } catch (exception) {
       this.informationMessage = exception;

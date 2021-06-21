@@ -54,12 +54,12 @@ describe('RegistrationComponent Test', () => {
     }).toThrowError('Error: Invalid roster');
   });
 
-  it('should not allow odd number of players', () => {
+  it('should not allow invalid number of players', () => {
     component.players.push('Clover');
     component.players.push('Sam');
     component.players.push('Alex');
     expect(function () {
       component.registerContestants();
-    }).toThrowError('Error: Uneven number of contestants not allowed');
+    }).toThrowError('Error: Only 2, 4, or 8 contestants allowed');
   });
 });
