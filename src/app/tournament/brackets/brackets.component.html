@@ -5,6 +5,7 @@
   </div>
   <ng-template #firstElseBlock>
     <h2>Round {{ roundNumber }}</h2>
+
     <form (submit)="onSubmit()">
       <div *ngFor="let amount of matches; let i = index; trackBy: trackByFn">
         <h3>Match {{ i + 1 }}</h3>
@@ -57,7 +58,11 @@
           </div>
         </ng-template>
       </div>
+
+     <p>{{message}}</p>
+
       <button type="submit">Complete Round</button>
     </form>
+
   </ng-template>
 </div>

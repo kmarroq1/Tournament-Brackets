@@ -1,16 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RosterService } from 'src/app/services/roster.service';
+import { FormsModule } from '@angular/forms';
 import { BracketsComponent } from './brackets.component';
 
 describe('BracketsComponent', () => {
+  let form: FormsModule;
   let component: BracketsComponent;
   let fixture: ComponentFixture<BracketsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BracketsComponent ]
-    })
-    .compileComponents();
+      imports: [FormsModule],
+      declarations: [BracketsComponent],
+      providers: [RosterService],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +22,9 @@ describe('BracketsComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should not submit', () => {
+    expect(function () {
+      component.onSubmit();
+    }).toThrowError('Not enough players registered for a match');
   });
 });
