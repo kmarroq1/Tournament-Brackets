@@ -44,18 +44,22 @@ export class BracketsComponent implements OnInit {
     let modifiedWinners = this.roundWinners.filter((winner) => winner !== '');
     if (modifiedWinners.length != this.matches.length) {
       this.message = 'Please select a winner for each match';
+      throw new Error('Please select a winner for each match');
       return;
     }
 
     this.setMatches();
 
-    this.currentPlayers.splice(0, this.currentPlayers.length);
+    //keep track of winners
+    this.currentPlayers = [];
     for (let index = 0; index < this.roundWinners.length; index++) {
       this.currentPlayers[index] = this.roundWinners[index];
     }
-    if (this.currentPlayers.length === 1) {
+
+    //declare winner and/or reset for another round
+    if (this.roundWinners.length === 1) {
+      this.message = 'Winner: ' + this.roundWinners[0];
       this.roundWinners = [];
-      this.roundWinners[0] = 'Winner: ' + this.currentPlayers[0];
     } else {
       this.roundWinners = [];
     }

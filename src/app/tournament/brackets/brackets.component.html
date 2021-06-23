@@ -1,7 +1,9 @@
 <div style="text-align:center">
+
+  <p>{{message}}</p>
+
   <div *ngIf="currentPlayers.length <= 1; else firstElseBlock">
-    <br>
-    {{ roundWinners.toString() }}
+
   </div>
   <ng-template #firstElseBlock>
     <h2>Round {{ roundNumber }}</h2>
@@ -58,8 +60,6 @@
           </div>
         </ng-template>
       </div>
-
-     <p>{{message}}</p>
 
       <button type="submit">Complete Round</button>
     </form>
