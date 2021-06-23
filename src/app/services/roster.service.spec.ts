@@ -43,4 +43,12 @@ describe('RosterService Test', () => {
 
     expect(service.getContestants().toString()).toEqual('Clover,Sam,Alex');
   });
+
+  it('should reset contestants', () => {
+    service.addContestant('Clover');
+    service.addContestant('Sam');
+    service.addContestant('Alex');
+    service.resetContestants();
+    expect(service.getContestants()).toEqual([]);
+  });
 });

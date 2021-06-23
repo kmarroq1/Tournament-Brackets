@@ -32,11 +32,14 @@ export class RegistrationComponent implements OnInit {
       this.informationMessage = this.rosterService.getContestants().toString();
     } catch (exception) {
       this.informationMessage = exception;
+      this.resetPlayers();
+      this.rosterService.resetContestants();
       console.error(this.informationMessage);
     }
   }
 
   autofill(playersToAutofill:number) {
+    this.resetPlayers();
     if (playersToAutofill === 2) {
       this.players.splice(0, playersToAutofill,'Clover', 'Alex');
     } else if (playersToAutofill === 4) {
@@ -44,6 +47,10 @@ export class RegistrationComponent implements OnInit {
     } else if(playersToAutofill ===8) {
       this.players.splice(0, playersToAutofill, 'Clover', 'Alex', 'Sam', 'Bunny', 'Dave', 'Kim', 'Gavin', 'Zakiria');
     }
+  }
+
+  resetPlayers(){
+    this.players = ['', '', '', '', '', '', '', ''];
   }
 
   trackByFn(index: any, item: any) {

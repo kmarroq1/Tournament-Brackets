@@ -62,4 +62,23 @@ describe('RegistrationComponent Test', () => {
       component.registerContestants();
     }).toThrowError('Error: Only 2, 4, or 8 contestants allowed');
   });
+
+  it('should autofill players array', () => {
+    component.autofill(2);
+    expect(component.players.toString()).toEqual('Clover,Alex,,,,,,');
+
+    component.autofill(4);
+    expect(component.players.toString()).toEqual('Clover,Alex,Sam,Bunny,,,,');
+
+    component.autofill(8);
+    expect(component.players.toString()).toEqual('Clover,Alex,Sam,Bunny,Dave,Kim,Gavin,Zakiria');
+  });
+
+  it('should reset players array', () => {
+    component.autofill(4);
+    expect(component.players.toString()).toEqual('Clover,Alex,Sam,Bunny,,,,');
+
+    component.autofill(2);
+    expect(component.players.toString()).toEqual('Clover,Alex,,,,,,');
+  });
 });
