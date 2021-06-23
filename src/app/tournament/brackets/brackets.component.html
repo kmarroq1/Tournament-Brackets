@@ -1,9 +1,10 @@
 <div style="text-align:center">
-  <h2>Round {{ roundNumber }}</h2>
-  <div *ngIf="currentPlayers.length === 1; else firstElseBlock">
-    Winner: {{ roundWinners.toString() }}
+  <div *ngIf="currentPlayers.length <= 1; else firstElseBlock">
+    <br>
+    {{ roundWinners.toString() }}
   </div>
   <ng-template #firstElseBlock>
+    <h2>Round {{ roundNumber }}</h2>
     <form (submit)="onSubmit()">
       <div *ngFor="let amount of matches; let i = index; trackBy: trackByFn">
         <h3>Match {{ i + 1 }}</h3>
