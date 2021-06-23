@@ -36,6 +36,16 @@ export class RegistrationComponent implements OnInit {
     }
   }
 
+  autofill(playersToAutofill:number) {
+    if (playersToAutofill === 2) {
+      this.players.splice(0, playersToAutofill,'Clover', 'Alex');
+    } else if (playersToAutofill === 4) {
+      this.players.splice(0, playersToAutofill, 'Clover', 'Alex', 'Sam', 'Bunny');
+    } else if(playersToAutofill ===8) {
+      this.players.splice(0, playersToAutofill, 'Clover', 'Alex', 'Sam', 'Bunny', 'Dave', 'Kim', 'Gavin', 'Zakiria');
+    }
+  }
+
   trackByFn(index: any, item: any) {
     return index;
   }
